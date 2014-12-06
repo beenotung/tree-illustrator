@@ -1,6 +1,6 @@
 package binarytreeillustrator.launcher;
 
-public class BinaryTreeIllustratorLauncher {
+class BinaryTreeIllustratorLauncher {
     public BinaryTreeIllustratorLauncher() {
     }
 

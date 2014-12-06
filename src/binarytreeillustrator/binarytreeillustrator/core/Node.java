@@ -6,16 +6,16 @@ import java.util.Vector;
  * Created by beenotung on 12/6/14.
  */
 public class Node {
-    public static Vector<Integer> keys = new Vector<Integer>();
-    public int key;
-    public Object value;
+    private static Vector<Integer> keys = new Vector<Integer>();
+    private final int key;
+    private Object value;
 
     private Node(int key, Object value) {
         this.key = key;
         this.value = value;
     }
 
-    public static boolean isExist(int key) {
+    private static boolean isExist(int key) {
         boolean found = false;
         for (Integer deltaKey : keys) {
             if (found = deltaKey.equals(key)) break;
