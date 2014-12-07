@@ -8,7 +8,7 @@ import java.util.Vector;
 public class Node<T> {
     private static Vector<Integer> keys = new Vector<>();
     private final int key;
-    private T value;
+    public T value;
 
     private Node(int key, T value) {
         this.key = key;
@@ -24,11 +24,17 @@ public class Node<T> {
     }
 
     public static <T> Node<T> getNewNode(T value) {
-        int newKey = keys.lastElement();
+        int newKey = 0;
+        if (keys.size() > 1)
+            newKey = keys.lastElement();
         do {
             newKey++;
         } while (isExist(newKey));
         keys.add(newKey);
         return new Node(newKey, value);
+    }
+
+    public int getKey() {
+        return key;
     }
 }

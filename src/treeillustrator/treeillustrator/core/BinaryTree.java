@@ -8,11 +8,15 @@ public class BinaryTree<T> extends Tree<T> {
         super();
         if (values == null) return;
         setRoot(values[0]);
-        BinaryTree<T> tree = this;
+        BinaryTree<T> tree = (BinaryTree<T>) root;
         for (int i = 1; i < values.length; i++) {
             if (tree.getDegree() >= 2)
-                tree = (BinaryTree) tree.getSmallestChild();
-            tree.addChildren(values[i]);
+                tree = (BinaryTree<T>) tree.getSmallestChild();
+            tree.addChildren(new BinaryTree<T>(values[i]));
         }
+    }
+
+    public BinaryTree(T value) {
+        super(value);
     }
 }

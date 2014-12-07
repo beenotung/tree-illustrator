@@ -6,15 +6,15 @@ import java.util.Vector;
  * Created by beenotung on 12/7/14.
  */
 public class Tree<T> {
+    public static final String MODE_POSTFIX = "Mode Postfix";
     protected Tree root, parent;
     protected Node node;
-    private Vector<Tree> children;
+    private Vector<Tree> children = new Vector<>();
 
     public Tree() {
         root = this;
         parent = null;
         node = null;
-        children = new Vector<>();
     }
 
     public Tree(T value) {
@@ -22,8 +22,13 @@ public class Tree<T> {
         node = Node.getNewNode(value);
     }
 
+    public Tree(T value, Tree parent) {
+        this(value);
+        this.parent = parent;
+    }
+
     public void setNode(T value) {
-        this.node = Node.getNewNode(value);
+        this.node = Node.<T>getNewNode(value);
     }
 
     public void setRoot(T value) {
@@ -45,7 +50,7 @@ public class Tree<T> {
     }
 
     public void addChildren(T value) {
-        addChildren(new Tree<T>(value));
+        addChildren(new Tree<T>(value, this));
     }
 
     public int getDegree() {
@@ -82,5 +87,23 @@ public class Tree<T> {
             if (largestChild.getHeight() < child.getHeight())
                 largestChild = child;
         return largestChild;
+    }
+
+    public Vector<T> dumpToVector(String mode) {
+        Vector<T> values = new Vector<>();
+        switch (mode) {
+            case MODE_POSTFIX:
+                for (Tree<T> child : children)
+                    values.addAll(child.dumpToVector(mode));
+                if (node != null) values.add((T) node.value);
+                break;
+        }
+        return values;
+    }
+
+    @Override
+    public String toString() {
+        Vector<T> values = dumpToVector(MODE_POSTFIX);
+        return values.toString();
     }
 }

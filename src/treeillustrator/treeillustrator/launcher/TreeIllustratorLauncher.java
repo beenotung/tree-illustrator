@@ -21,5 +21,6 @@ public class TreeIllustratorLauncher<T> {
     }
 
     public void start() {
+        System.out.println(tree.toString());
     }
 }
