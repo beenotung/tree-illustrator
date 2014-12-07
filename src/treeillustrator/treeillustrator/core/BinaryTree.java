@@ -1,10 +1,10 @@
 package treeillustrator.core;
-
 /**
  * Created by beenotung on 12/7/14.
  */
-public class BinaryTree<T> extends Tree {
+public class BinaryTree<T> extends Tree<T> {
     public BinaryTree(T[] values) {
+        super();
         if (values == null) return;
         setRoot(values[0]);
         BinaryTree<T> tree = this;
