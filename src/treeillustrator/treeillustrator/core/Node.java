@@ -1,4 +1,4 @@
-package binarytreeillustrator.core;
+package treeillustrator.core;
 
 import java.util.Vector;
 
