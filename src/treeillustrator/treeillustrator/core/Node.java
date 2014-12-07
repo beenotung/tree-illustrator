@@ -5,12 +5,12 @@ import java.util.Vector;
 /**
  * Created by beenotung on 12/6/14.
  */
-public class Node {
-    private static Vector<Integer> keys = new Vector<Integer>();
+public class Node<T> {
+    private static Vector<Integer> keys = new Vector<>();
     private final int key;
-    private Object value;
+    private T value;
 
-    private Node(int key, Object value) {
+    private Node(int key, T value) {
         this.key = key;
         this.value = value;
     }
@@ -23,7 +23,7 @@ public class Node {
         return found;
     }
 
-    public static Node getNewNode(Object value) {
+    public static <T> Node<T> getNewNode(T value) {
         int newKey = keys.lastElement();
         do {
             newKey++;
