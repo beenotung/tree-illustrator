@@ -5,5 +5,5 @@ import javax.swing.*;
 /**
  * Created by beenotung on 12/7/14.
  */
-class TreeIllustratorJFrame extends JFrame {
+public class TreeIllustratorJFrame extends JFrame {
 }
