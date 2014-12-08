@@ -8,10 +8,12 @@ public class TreeIllustratorLauncher<T> {
     public static final String MODE_BINARY_TREE = "Mode Binary Tree";
     private final String mode;
     Tree tree;
+    TreeIllustratorJFrame frame;
 
     @SuppressWarnings("SameParameterValue")
     public TreeIllustratorLauncher(String mode) {
         this.mode = mode;
+        frame = new TreeIllustratorJFrame();
     }
 
     public void init(T[] values) {
@@ -19,11 +21,12 @@ public class TreeIllustratorLauncher<T> {
             case MODE_BINARY_TREE:
                 tree = new BinaryTree<T>(values);
         }
+        frame.init(tree);
     }
 
     public void start() {
         //TODO load content into GUI component
-        TreeIllustratorJFrame frame = new TreeIllustratorJFrame();
+        frame.start();
         System.out.println(tree.toString());
     }
 }

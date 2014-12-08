@@ -11,7 +11,8 @@ public class Tree<T> {
     public static final String MODE_PREFIX = "Mode Prefix";
     public static final String MODE_INFIX = "Mode Infix";
 
-    protected Tree root, parent;
+    public Tree root;
+    protected Tree parent;
     protected Node node;
     private Vector<Tree> children = new Vector<>();
 
