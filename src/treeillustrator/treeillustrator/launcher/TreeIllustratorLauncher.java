@@ -16,7 +16,7 @@ public class TreeIllustratorLauncher<T> {
     public void init(T[] values) {
         switch (mode) {
             case MODE_BINARY_TREE:
-                tree = new BinaryTree<T>(values);
+                tree = new BinaryTree<>(values);
         }
     }
 
