@@ -21,5 +21,8 @@ public class TreeIllustratorLauncher<T> {
     }
 
     public void start() {
+        //TODO load content into GUI component
+        TreeIllustratorJFrame
+        System.out.println(tree.toString());
     }
 }
