@@ -1,5 +1,6 @@
 package treeillustrator.core;
 
+import java.util.Collections;
 import java.util.Vector;
 
 /**
@@ -7,6 +8,9 @@ import java.util.Vector;
  */
 public class Tree<T> {
     public static final String MODE_POSTFIX = "Mode Postfix";
+    public static final String MODE_PREFIX = "Mode Prefix";
+    public static final String MODE_INFIX = "Mode Infix";
+
     protected Tree root, parent;
     protected Node node;
     private Vector<Tree> children = new Vector<>();
@@ -97,13 +101,31 @@ public class Tree<T> {
                     values.addAll(child.dumpToVector(mode));
                 if (node != null) values.add((T) node.value);
                 break;
+            case MODE_PREFIX:
+                if (node != null) values.add((T) node.value);
+                for (Tree<T> child : children)
+                    values.addAll(child.dumpToVector(mode));
+                break;
+            case MODE_INFIX:
+                for (int i = 0; i < children.size() / 2; i++)
+                    values.addAll(children.get(i).dumpToVector(mode));
+                if (node != null) values.add((T) node.value);
+                for (int i = children.size() / 2; i < children.size(); i++)
+                    values.addAll(children.get(i).dumpToVector(mode));
+                break;
         }
         return values;
+    }
+
+    public String toString(String mode) {
+        Vector<T> values = dumpToVector(mode);
+        return values.toString();
     }
 
     @Override
     public String toString() {
         Vector<T> values = dumpToVector(MODE_POSTFIX);
+        Collections.reverse(values);
         return values.toString();
     }
 }
