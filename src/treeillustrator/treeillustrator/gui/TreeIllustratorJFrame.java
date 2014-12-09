@@ -5,6 +5,7 @@ import treeillustrator.StaticStuff;
 import treeillustrator.core.Tree;
 
 import java.awt.*;
+import java.util.Stack;
 
 /**
  * Created by beenotung on 12/7/14.
@@ -31,9 +32,15 @@ public class TreeIllustratorJFrame extends CanvasJFrame {
 
     @Override
     protected void myTick() {
-        Tree tree = treeRoot.root;
-        for (int i = 0; i < tree.getHeight(); i++) {
-            System.out.println(i);
+        System.out.println();
+        Stack<Tree> treeStack = new Stack<>();
+        treeStack.push(treeRoot.root);
+        while (!treeStack.isEmpty()) {
+            Tree tree = treeStack.pop();
+            System.out.println(tree.toString());
+            for (int i = 0; i < tree.getDegree(); i++) {
+                treeStack.push(tree.getChild(i));
+            }
         }
     }
 

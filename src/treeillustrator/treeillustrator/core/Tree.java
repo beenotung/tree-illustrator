@@ -10,30 +10,31 @@ public class Tree<T> {
     public static final String MODE_POSTFIX = "Mode Postfix";
     public static final String MODE_PREFIX = "Mode Prefix";
     public static final String MODE_INFIX = "Mode Infix";
-
+    protected final int MAX_DIRECT_CHILDREN;
     public Tree root;
     protected Tree parent;
     protected Node node;
     private Vector<Tree> children = new Vector<>();
 
-    public Tree() {
+    public Tree(int max_direct_children) {
+        MAX_DIRECT_CHILDREN = max_direct_children;
         root = this;
         parent = null;
         node = null;
     }
 
-    public Tree(T value) {
-        super();
+    public Tree(int max_direct_children, T value) {
+        this(max_direct_children);
         node = Node.getNewNode(value);
     }
 
-    public Tree(T value, Tree parent) {
-        this(value);
+    public Tree(int max_direct_children, T value, Tree parent) {
+        this(max_direct_children, value);
         this.parent = parent;
     }
 
     public void setNode(T value) {
-        this.node = Node.<T>getNewNode(value);
+        this.node = Node.getNewNode(value);
     }
 
     public void setRoot(T value) {
@@ -49,13 +50,18 @@ public class Tree<T> {
     }
 
     public void addChildren(Tree child) {
-        child.root = this.root;
-        child.parent = this;
-        children.add(child);
+        if (getDegree() < MAX_DIRECT_CHILDREN) {
+            child.root = this.root;
+            child.parent = this;
+            children.add(child);
+        } else {
+            Tree<T> tree = getSmallestChild();
+            tree.addChildren(child);
+        }
     }
 
     public void addChildren(T value) {
-        addChildren(new Tree<T>(value, this));
+        addChildren(new Tree<T>(MAX_DIRECT_CHILDREN, value, this));
     }
 
     public int getDegree() {
@@ -129,6 +135,4 @@ public class Tree<T> {
         Collections.reverse(values);
         return values.toString();
     }
-
-
 }
